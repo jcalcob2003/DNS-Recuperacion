@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 $TTL    86400
 @       IN      SOA     ns1.ies.test. admin.ies.test. (
                           2024010101 ; Serial
