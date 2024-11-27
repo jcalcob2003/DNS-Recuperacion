@@ -1,0 +1,23 @@
+zone "ies.test" {
+    type slave;
+    file "/var/cache/bind/db.ies.test";
+    masters { 192.168.57.10; };
+};
+
+zone "informatica.ies.test" {
+    type slave;
+    file "/var/cache/bind/db.informatica";
+    masters { 192.168.57.10; };
+};
+
+zone "aulas.ies.test" {
+    type slave;
+    file "/var/cache/bind/db.aulas";
+    masters { 192.168.57.10; };
+};
+
+zone "departamentos.ies.test" {
+    type slave;
+    file "/var/cache/bind/db.departamentos";
+    masters { 192.168.57.10; };
+};

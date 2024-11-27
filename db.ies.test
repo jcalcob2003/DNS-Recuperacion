@@ -1,13 +1,14 @@
-$TTL    604800
-@       IN      SOA     dnsa.ies.test. root.ies.test. (
-                           2         ; Serial
-                           604800    ; Refresh
-                           86400     ; Retry
-                           2419200   ; Expire
-                           604800 )  ; Negative Cache TTL
+<<<<<<< HEAD
+$TTL    86400
+@       IN      SOA     ns1.ies.test. admin.ies.test. (
+                          2024010101 ; Serial
+                          3600       ; Refresh
+                          1800       ; Retry
+                          604800     ; Expire
+                          86400 )    ; Negative Cache TTL
 
-           IN      NS      dnsa.ies.test.
+; Registros NS
+@       IN      NS      ns1.ies.test.
 
-dnsa      IN      A       192.168.57.10   ; Registro A para dnsa.ies.test
-server01  IN      A       192.168.57.10
-pcprofesor IN     A       192.168.57.20
+; Registros A
+ns1     IN      A       192.168.57.10

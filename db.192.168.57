@@ -1,12 +1,26 @@
-$TTL    604800
-@       IN      SOA     dnsa.ies.test. root.ies.test. (
-                        2         ; Serial
-                        604800    ; Refresh
-                        86400     ; Retry
-                        2419200   ; Expire
-                        604800 )  ; Negative Cache TTL
+<<<<<<< HEAD
+$TTL    86400
+@       IN      SOA     ns1.ies.test. admin.ies.test. (
+                          2024010101 ; Serial
+                          3600       ; Refresh
+                          1800       ; Retry
+                          604800     ; Expire
+                          86400 )    ; Negative Cache TTL
 
-        IN      NS      dnsa.ies.test.
+; Registros PTR
+10      IN      PTR     server01.informatica.ies.test.
+20      IN      PTR     pcprofesor.informatica.ies.test.
+21      IN      PTR     pc01.informatica.ies.test.
+22      IN      PTR     pc02.informatica.ies.test.
+23      IN      PTR     pc03.informatica.ies.test.
+100     IN      PTR     server02.aulas.ies.test.
+101     IN      PTR     pc04.aulas.ies.test.
+102     IN      PTR     pc05.aulas.ies.test.
+103     IN      PTR     pc06.aulas.ies.test.
+104     IN      PTR     pc07.aulas.ies.test.
+150     IN      PTR     matematicas.departamentos.ies.test.
+151     IN      PTR     ingles01.departamentos.ies.test.
+152     IN      PTR     ingles02.departamentos.ies.test.
+153     IN      PTR     lengua.departamentos.ies.test.
+154     IN      PTR     tic.departamentos.ies.test.
 
-10      IN      PTR     server01.ies.test.
-20      IN      PTR     pcprofesor.ies.test.
