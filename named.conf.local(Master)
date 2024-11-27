@@ -1,0 +1,28 @@
+zone "ies.test" {
+    type master;
+    file "/etc/bind/zones/db.ies.test";
+};
+
+zone "informatica.ies.test" {
+    type master;
+    file "/etc/bind/zones/db.informatica";
+    allow-transfer { 192.168.57.11; };
+};
+
+zone "aulas.ies.test" {
+    type master;
+    file "/etc/bind/zones/db.aulas";
+    allow-transfer { 192.168.57.11; };
+};
+
+zone "departamentos.ies.test" {
+    type master;
+    file "/etc/bind/zones/db.departamentos";
+    allow-transfer { 192.168.57.11; };
+};
+
+zone "57.168.192.in-addr.arpa" {
+    type master;
+    file "/etc/bind/zones/db.192.168.57";
+    allow-transfer { 192.168.57.11; };
+};

@@ -1,0 +1,18 @@
+$TTL    86400
+@       IN      SOA     ns1.aulas.ies.test. admin.ies.test. (
+                          2024010101 ; Serial
+                          3600       ; Refresh
+                          1800       ; Retry
+                          604800     ; Expire
+                          86400 )    ; Negative Cache TTL
+
+; Registros NS
+@       IN      NS      ns1.aulas.ies.test.
+
+; Registros A
+ns1	IN	A	192.168.57.10
+server02        IN      A       192.168.57.100
+pc04            IN      A       192.168.57.101
+pc05            IN      A       192.168.57.102
+pc06            IN      A       192.168.57.103
+pc07            IN      A       192.168.57.104
