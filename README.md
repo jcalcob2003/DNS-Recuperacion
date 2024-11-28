@@ -66,9 +66,28 @@ zone "ies.test" {
     file "/etc/bind/zones/db.ies.test";
 };
 
+zone "informatica.ies.test" {
+    type master;
+    file "/etc/bind/zones/db.informatica";
+    allow-transfer { 192.168.57.11; };
+};
+
+zone "aulas.ies.test" {
+    type master;
+    file "/etc/bind/zones/db.aulas";
+    allow-transfer { 192.168.57.11; };
+};
+
+zone "departamentos.ies.test" {
+    type master;
+    file "/etc/bind/zones/db.departamentos";
+    allow-transfer { 192.168.57.11; };
+};
+
 zone "57.168.192.in-addr.arpa" {
     type master;
     file "/etc/bind/zones/db.192.168.57";
+    allow-transfer { 192.168.57.11; };
 };
 ```
 Crea los archivos de zona en ```/etc/bind/zones/```. Si no existe, crea el directorio:
@@ -92,21 +111,101 @@ $TTL    604800
 server01      IN      A       192.168.57.10
 pcprofesor    IN      A       192.168.57.20
 ```
+Archivo de zona informatica ```/etc/bind/zones/db.informatica```:
+
+```plaintext
+$TTL    86400
+@       IN      SOA     ns1.informatica.ies.test. admin.ies.test. (
+                          2024010101 ; Serial
+                          3600       ; Refresh
+                          1800       ; Retry
+                          604800     ; Expire
+                          86400 )    ; Negative Cache TTL
+
+; Registros NS
+@       IN      NS      ns1.informatica.ies.test.
+
+; Registros A
+ns1        IN      A       192.168.57.10
+server01	IN	A	192.168.57.10
+pcprofesor      IN      A       192.168.57.20
+pc01            IN      A       192.168.57.21
+pc02            IN      A       192.168.57.22
+pc03            IN      A       192.168.57.23
+```
+Archivo de zona departamentos ```/etc/bind/zones/db.departamentos```:
+
+```plaintext
+$TTL    86400
+@       IN      SOA     ns1.departamentos.ies.test. admin.ies.test. (
+                          2024010101 ; Serial
+                          3600       ; Refresh
+                          1800       ; Retry
+                          604800     ; Expire
+                          86400 )    ; Negative Cache TTL
+
+; Registros NS
+@       IN      NS      ns1.departamentos.ies.test.
+ns1	IN	A	192.168.57.10  ;
+
+; Registros A
+@	IN	A	192.168.57.10  ;
+matematicas     IN      A       192.168.57.150
+ingles01        IN      A       192.168.57.151
+ingles02        IN      A       192.168.57.152
+lengua          IN      A       192.168.57.153
+tic             IN      A       192.168.57.154
+```
+Archivo de zona aulas ```/etc/bind/zones/db.aulas```:
+
+```plaintext
+$TTL    86400
+@       IN      SOA     ns1.aulas.ies.test. admin.ies.test. (
+                          2024010101 ; Serial
+                          3600       ; Refresh
+                          1800       ; Retry
+                          604800     ; Expire
+                          86400 )    ; Negative Cache TTL
+
+; Registros NS
+@       IN      NS      ns1.aulas.ies.test.
+
+; Registros A
+ns1	IN	A	192.168.57.10
+server02        IN      A       192.168.57.100
+pc04            IN      A       192.168.57.101
+pc05            IN      A       192.168.57.102
+pc06            IN      A       192.168.57.103
+pc07            IN      A       192.168.57.104
+```
 Archivo de zona inversa ```/etc/bind/zones/db.192.168.57```:
 
 ```plaintext
-$TTL    604800
-@       IN      SOA     dnsa.ies.test. root.ies.test. (
-                        2         ; Serial
-                        604800    ; Refresh
-                        86400     ; Retry
-                        2419200   ; Expire
-                        604800 )  ; Negative Cache TTL
+<<<<<<< HEAD
+$TTL    86400
+@       IN      SOA     ns1.ies.test. admin.ies.test. (
+                          2024010101 ; Serial
+                          3600       ; Refresh
+                          1800       ; Retry
+                          604800     ; Expire
+                          86400 )    ; Negative Cache TTL
 
-        IN      NS      dnsa.ies.test.
-
-10      IN      PTR     server01.ies.test.
-20      IN      PTR     pcprofesor.ies.test.
+; Registros PTR
+10      IN      PTR     server01.informatica.ies.test.
+20      IN      PTR     pcprofesor.informatica.ies.test.
+21      IN      PTR     pc01.informatica.ies.test.
+22      IN      PTR     pc02.informatica.ies.test.
+23      IN      PTR     pc03.informatica.ies.test.
+100     IN      PTR     server02.aulas.ies.test.
+101     IN      PTR     pc04.aulas.ies.test.
+102     IN      PTR     pc05.aulas.ies.test.
+103     IN      PTR     pc06.aulas.ies.test.
+104     IN      PTR     pc07.aulas.ies.test.
+150     IN      PTR     matematicas.departamentos.ies.test.
+151     IN      PTR     ingles01.departamentos.ies.test.
+152     IN      PTR     ingles02.departamentos.ies.test.
+153     IN      PTR     lengua.departamentos.ies.test.
+154     IN      PTR     tic.departamentos.ies.test.
 ```
 Verifica los archivos de zona:
 
@@ -129,9 +228,21 @@ zone "ies.test" {
     masters { 192.168.57.10; };
 };
 
-zone "57.168.192.in-addr.arpa" {
+zone "informatica.ies.test" {
     type slave;
-    file "/var/cache/bind/db.192.168.57";
+    file "/var/cache/bind/db.informatica";
+    masters { 192.168.57.10; };
+};
+
+zone "aulas.ies.test" {
+    type slave;
+    file "/var/cache/bind/db.aulas";
+    masters { 192.168.57.10; };
+};
+
+zone "departamentos.ies.test" {
+    type slave;
+    file "/var/cache/bind/db.departamentos";
     masters { 192.168.57.10; };
 };
 ```
