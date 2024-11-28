@@ -17,7 +17,7 @@ Este repositorio contiene los archivos necesarios para configurar servidores DNS
 
 # 1. Configuración de BIND en DNSA (Maestro)
 
-## Paso 1: Configuración de `/etc/bind/named.conf`.options
+## Paso 1: Configuración de `/etc/bind/named.conf.options`
 Haz una copia de seguridad del archivo:
 
 ```bash
